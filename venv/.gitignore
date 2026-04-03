@@ -1,0 +1,15 @@
+# Ignore the large virtual environment folders
+venv/
+.venv/
+pyvenv.cfg
+
+# Ignore the temporary/junk files you mentioned
+demo.pdf
+hello.txt
+out.csv
+package.json
+vercel.json
+
+# Ignore Python cache files
+__pycache__/
+*.pyc

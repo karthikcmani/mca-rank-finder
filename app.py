@@ -14,7 +14,12 @@ def load_pdf_data():
                         rows.append(row)
     return rows
 data_rows = load_pdf_data()
-name = "User"
+st.set_page_config(
+    page_title="MCA Rank Finder 2024",
+    page_icon="icon.png", 
+    layout="centered"
+)
+st.title("MCA Rank Finder 2024")
 query = st.text_input("Search by Name / Roll Number").upper().strip()
 matches = []
 name = query
@@ -30,19 +35,20 @@ if name:
     if not matches:
         st.error("Sorry, your Name / Roll Number is not found in the list.")
     elif len(matches) == 1:
-        st.success(f'Hello, {matches[0][3]}!')
-        st.info(f"Your Rank is {matches[0][0]}")
-        st.info(f"Your Score is {matches[0][5]} Out of 120")
-        st.info(f"Your Marks Details Per Subjects:")
-        st.info(f"Computer Science(Out of 50): {matches[0][6]}")
-        st.info(f"Mathematics and Statistics(Out of 25): {matches[0][7]}")
-        st.info(f"Quantitative Aptitude, Logical Ability (Out of 25): {matches[0][8]}")
-        st.info(f"English & G.K (Out of 20): {matches[0][9]}")
+        st.markdown(f'### Hi, {matches[0][3].title()}!')
+        st.caption(f"Roll Number: {matches[0][2]} | Application Number: {matches[0][1]} | Date of Birth: {matches[0][4]}")
+        col1, col2 = st.columns([1,1])
+        col1.metric("Rank", f"{matches[0][0]}")
+        col2.metric("Score ", f"{matches[0][5]}/120")
+        st.divider()
+        st.markdown("#### Subject Breakdown")
+        col1, col2 = st.columns([1,1])
+        col1.metric(f"Computer Science", f"{matches[0][6]}/50")
+        col2.metric(f"Mathematics and Statistics", f"{matches[0][7]}/25")
+        col3, col4 = st.columns([1,1])
+        col3.metric(f"Quantitative Aptitude, Logical Ability", f"{matches[0][8]}/25")
+        col4.metric(f"English & G.K", f"{matches[0][9]}/20")
     else:
         st.info("Multiple entries found. Please find your Roll Number below:")
         df_matches = pd.DataFrame(matches, columns=["Rank", "App No", "Roll No", "Name", "DOB", "Total", "CS", "Math", "Apt", "Eng", "Final Rank"])
-        st.table(df_matches[["Rank", "Roll No", "Name", "Total"]])
-
-def handler(req, res):
-    return
-app = handler
+        st.table(df_matches[["Rank", "Roll No", "Name", "Total"]]) 
