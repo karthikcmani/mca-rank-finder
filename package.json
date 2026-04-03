@@ -1,0 +1,8 @@
+{
+  "name": "mca-rank-finder",
+  "version": "1.0.0",
+  "scripts": {
+    "install": "pip install -r requirements.txt",
+    "build": "mkdir -p public"
+  }
+}

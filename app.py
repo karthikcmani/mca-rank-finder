@@ -42,7 +42,7 @@ if name:
         st.info("Multiple entries found. Please find your Roll Number below:")
         df_matches = pd.DataFrame(matches, columns=["Rank", "App No", "Roll No", "Name", "DOB", "Total", "CS", "Math", "Apt", "Eng", "Final Rank"])
         st.table(df_matches[["Rank", "Roll No", "Name", "Total"]])
-# Dummy for Vercel
-def handler(event, context):
-    return {"statusCode": 200, "body": "Success"}
+
+def handler(req, res):
+    return
 app = handler
